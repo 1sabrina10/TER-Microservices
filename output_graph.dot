@@ -1,0 +1,236 @@
+digraph Microservices {
+    rankdir=LR;
+    graph [fontname="Arial", nodesep=0.5, ranksep=1.0, bgcolor=white];
+    node [fontname="Arial", fontsize=10, shape=box, style="filled,rounded"];
+    edge [fontname="Arial", arrowsize=0.8];
+
+    subgraph cluster_0 {
+        label="CreateCommentsService";
+        style="filled,rounded";
+        fillcolor="#b9e3d3";
+        fontname="Arial Bold";
+        "CreateComments_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_1 {
+        label="CreateTimeEntriesService";
+        style="filled,rounded";
+        fillcolor="#dcbadc";
+        fontname="Arial Bold";
+        "CreateTimeEntries_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_2 {
+        label="CreateTaskDependenciesService";
+        style="filled,rounded";
+        fillcolor="#d4c2f3";
+        fontname="Arial Bold";
+        "CreateTaskDependencies_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_3 {
+        label="CreateProjectMembersService";
+        style="filled,rounded";
+        fillcolor="#b5c9cd";
+        fontname="Arial Bold";
+        "CreateProjectMembers_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_4 {
+        label="CreateTasksService";
+        style="filled,rounded";
+        fillcolor="#c3ecf1";
+        fontname="Arial Bold";
+        "CreateTasks_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_5 {
+        label="CreateNotificationsService";
+        style="filled,rounded";
+        fillcolor="#d8c3cb";
+        fontname="Arial Bold";
+        "CreateNotifications_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_6 {
+        label="CreateUsersService";
+        style="filled,rounded";
+        fillcolor="#f0b6f1";
+        fontname="Arial Bold";
+        "CreateUsers_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_7 {
+        label="CreateProjectsService";
+        style="filled,rounded";
+        fillcolor="#cce6d3";
+        fontname="Arial Bold";
+        "CreateProjects_change" [label="change", fillcolor=white];
+    }
+
+    subgraph cluster_8 {
+        label="UserService";
+        style="filled,rounded";
+        fillcolor="#d7beb8";
+        fontname="Arial Bold";
+        "User_send_welcome_notification" [label="send_welcome_notification", fillcolor=white];
+        "User_assigned_tasks_count" [label="assigned_tasks_count", fillcolor=white];
+        "User_overdue_tasks" [label="overdue_tasks", fillcolor=white];
+        "User_total_logged_minutes" [label="total_logged_minutes", fillcolor=white];
+        "User_complete_task" [label="complete_task", fillcolor=white];
+        "User_create_task_completion_notification" [label="create_task_completion_notification", fillcolor=white];
+        "User_check_project_completion" [label="check_project_completion", fillcolor=white];
+    }
+
+    subgraph cluster_9 {
+        label="ProjectService";
+        style="filled,rounded";
+        fillcolor="#c3c3ea";
+        fontname="Arial Bold";
+        "Project_add_owner_as_member" [label="add_owner_as_member", fillcolor=white];
+        "Project_notify_members" [label="notify_members", fillcolor=white];
+    }
+
+    subgraph cluster_10 {
+        label="TaskDependencyService";
+        style="filled,rounded";
+        fillcolor="#c0eded";
+        fontname="Arial Bold";
+        "TaskDependency_cannot_block_itself" [label="cannot_block_itself", fillcolor=white];
+    }
+
+    subgraph cluster_11 {
+        label="NotificationService";
+        style="filled,rounded";
+        fillcolor="#b4f7de";
+        fontname="Arial Bold";
+        "Notification_send_email_if_critical" [label="send_email_if_critical", fillcolor=white];
+    }
+
+    subgraph cluster_12 {
+        label="CommentService";
+        style="filled,rounded";
+        fillcolor="#edd7e4";
+        fontname="Arial Bold";
+        "Comment_notify_task_owner" [label="notify_task_owner", fillcolor=white];
+    }
+
+    subgraph cluster_13 {
+        label="TimeEntryService";
+        style="filled,rounded";
+        fillcolor="#f5dfde";
+        fontname="Arial Bold";
+        "TimeEntry_duration_hours" [label="duration_hours", fillcolor=white];
+        "TimeEntry_entry_date_not_in_future" [label="entry_date_not_in_future", fillcolor=white];
+    }
+
+    subgraph cluster_14 {
+        label="TaskService";
+        style="filled,rounded";
+        fillcolor="#eaefbe";
+        fontname="Arial Bold";
+        "Task_due_date_cannot_be_in_the_past" [label="due_date_cannot_be_in_the_past", fillcolor=white];
+    }
+
+    subgraph cluster_15 {
+        label="TimeEntriesService";
+        style="filled,rounded";
+        fillcolor="#d2bcc0";
+        fontname="Arial Bold";
+        "TimeEntriesController_create" [label="create", fillcolor=white];
+    }
+
+    subgraph cluster_16 {
+        label="NotificationsService";
+        style="filled,rounded";
+        fillcolor="#d5dcf5";
+        fontname="Arial Bold";
+        "NotificationsController_index" [label="index", fillcolor=white];
+        "NotificationsController_mark_as_read" [label="mark_as_read", fillcolor=white];
+    }
+
+    subgraph cluster_17 {
+        label="SessionsService";
+        style="filled,rounded";
+        fillcolor="#dff3ec";
+        fontname="Arial Bold";
+        "SessionsController_new" [label="new", fillcolor=white];
+        "SessionsController_create" [label="create", fillcolor=white];
+    }
+
+    subgraph cluster_18 {
+        label="CommentsService";
+        style="filled,rounded";
+        fillcolor="#e1ccb5";
+        fontname="Arial Bold";
+        "CommentsController_create" [label="create", fillcolor=white];
+    }
+
+    subgraph cluster_19 {
+        label="TasksService";
+        style="filled,rounded";
+        fillcolor="#e1e3d5";
+        fontname="Arial Bold";
+        "TasksController_index" [label="index", fillcolor=white];
+        "TasksController_show" [label="show", fillcolor=white];
+        "TasksController_new" [label="new", fillcolor=white];
+        "TasksController_create" [label="create", fillcolor=white];
+    }
+
+    subgraph cluster_20 {
+        label="UsersService";
+        style="filled,rounded";
+        fillcolor="#f6f3d5";
+        fontname="Arial Bold";
+        "UsersController_new" [label="new", fillcolor=white];
+        "UsersController_create" [label="create", fillcolor=white];
+    }
+
+    subgraph cluster_21 {
+        label="ProjectsService";
+        style="filled,rounded";
+        fillcolor="#dccee3";
+        fontname="Arial Bold";
+        "ProjectsController_index" [label="index", fillcolor=white];
+        "ProjectsController_show" [label="show", fillcolor=white];
+        "ProjectsController_new" [label="new", fillcolor=white];
+        "ProjectsController_create" [label="create", fillcolor=white];
+    }
+
+    subgraph cluster_22 {
+        label="ApplicationService";
+        style="filled,rounded";
+        fillcolor="#c8e9d3";
+        fontname="Arial Bold";
+        "ApplicationController_current_user" [label="current_user", fillcolor=white];
+        "ApplicationController_logged_in?" [label="logged_in?", fillcolor=white];
+        "ApplicationController_require_login" [label="require_login", fillcolor=white];
+    }
+
+    subgraph cluster_23 {
+        label="TaskMailerService";
+        style="filled,rounded";
+        fillcolor="#f7dff4";
+        fontname="Arial Bold";
+        "TaskMailer_notification_email" [label="notification_email", fillcolor=white];
+        "TaskMailer_deadline_reminder" [label="deadline_reminder", fillcolor=white];
+        "TaskMailer_task_assigned" [label="task_assigned", fillcolor=white];
+        "TaskMailer_project_invitation" [label="project_invitation", fillcolor=white];
+    }
+
+    "User_complete_task" -> "User_create_task_completion_notification" [color="#95A5A6"];
+    "User_complete_task" -> "User_check_project_completion" [color="#95A5A6"];
+    "Notification_send_email_if_critical" -> "TaskMailer_notification_email" [color="#E74C3C", style=dashed];
+    "UsersController_new" -> "SessionsController_new" [color="#E74C3C", style=dashed];
+    "UsersController_new" -> "TasksController_new" [color="#E74C3C", style=dashed];
+    "UsersController_new" -> "UsersController_new" [color="#95A5A6"];
+    "UsersController_new" -> "ProjectsController_new" [color="#E74C3C", style=dashed];
+    "UsersController_create" -> "SessionsController_new" [color="#E74C3C", style=dashed];
+    "UsersController_create" -> "TasksController_new" [color="#E74C3C", style=dashed];
+    "UsersController_create" -> "UsersController_new" [color="#95A5A6"];
+    "UsersController_create" -> "ProjectsController_new" [color="#E74C3C", style=dashed];
+    "ProjectsController_new" -> "SessionsController_new" [color="#E74C3C", style=dashed];
+    "ProjectsController_new" -> "TasksController_new" [color="#E74C3C", style=dashed];
+    "ProjectsController_new" -> "UsersController_new" [color="#E74C3C", style=dashed];
+    "ProjectsController_new" -> "ProjectsController_new" [color="#95A5A6"];
+}
