@@ -77,7 +77,9 @@ public class RubyParser {
         List<RubyClass> classes = new ArrayList<>();
         Path path = Paths.get(directoryPath);
 
-        if (!Files.exists(path)) return classes;
+        if (!Files.exists(path)) {
+            throw new IllegalArgumentException("files not found");
+        }
 
         Files.walk(path)
                 .filter(p -> p.toString().endsWith(".rb"))
@@ -100,26 +102,24 @@ public class RubyParser {
         List<String> lines = Files.readAllLines(file.toPath());
 
         // Patterns de detection
-        Pattern classPattern        = Pattern.compile(
-                "^\\s*class\\s+([A-Za-z0-9_:]+)(?:\\s*<\\s*([A-Za-z0-9_:]+))?");
-        Pattern defPattern          = Pattern.compile(
-                "^\\s*def\\s+([A-Za-z0-9_\\.!?]+)(?:\\s*\\((.*)\\))?");
-        Pattern callPattern         = Pattern.compile(
-                "([A-Z][A-Za-z0-9_]*)\\.([a-z0-9_]+)");
-        Pattern beforeActionPattern = Pattern.compile(
-                "before_action\\s+:([a-z0-9_]+)");
-        Pattern bareCallPattern     = Pattern.compile(
-                "^\\s*([a-z0-9_]+[!?]?)(?:\\s|\\(|$)");
+        Pattern classPattern = Pattern.compile("^\\s*class\\s+([A-Za-z0-9_:]+)(?:\\s*<\\s*([A-Za-z0-9_:]+))?");
+
+        Pattern defPattern = Pattern.compile("^\\s*def\\s+([A-Za-z0-9_\\.!?]+)(?:\\s*\\((.*)\\))?");
+
+        Pattern callPattern = Pattern.compile("([A-Za-z_][A-Za-z0-9_]*)\\.([a-z0-9_!?]+)");
+
+        Pattern beforeActionPattern = Pattern.compile("before_action\\s+:([a-z0-9_]+)");
+
+        Pattern bareCallPattern = Pattern.compile("^\\s*([a-z0-9_]+[!?]?)(?:\\s|\\(|$)");
 
         // Receivers  Rails a ignorer (pas de classes interne Ruby)
-        Set<String> ignoreReceivers = new HashSet<>(Arrays.asList(
-                "ActiveSupport", "ActionDispatch", "ApplicationSystemTestCase"));
+        Set<String> ignoreReceivers = new HashSet<>(Arrays.asList("ActiveSupport", "ActionDispatch", "ApplicationSystemTestCase",
+                "self", "super", "nil", "true", "false","puts", "print", "raise", "require"
+        ));
 
         // Mots-cles Ruby a ne pas confondre avec des appels de methode
-        Set<String> keywords = new HashSet<>(Arrays.asList(
-                "def", "end", "class", "module", "if", "else", "elsif",
-                "unless", "while", "until", "for", "return", "yield",
-                "require", "include", "extend"));
+        Set<String> keywords = new HashSet<>(Arrays.asList("def", "end", "class", "module", "if", "else", "elsif",
+                "unless", "while", "until", "for", "return", "yield", "require", "include", "extend"));
 
         // Etat courant du parsing
         RubyClass  currentClass  = null;
@@ -129,7 +129,8 @@ public class RubyParser {
             String trimmed = line.trim();
 
             // Ignorer lignes vides et commentaires
-            if (trimmed.isEmpty() || trimmed.startsWith("#")) continue;
+            if (trimmed.isEmpty() || trimmed.startsWith("#"))
+                continue;
 
             // Detection d'une classe
             Matcher classM = classPattern.matcher(line);
@@ -161,8 +162,8 @@ public class RubyParser {
                     }
                 }
 
-                currentMethod = new RubyMethod(
-                        defM.group(1), currentClass.name, params, "");
+                currentMethod = new RubyMethod(defM.group(1), currentClass.name, params, "");
+
                 currentMethod.optionalParamsCount = optCount;
                 currentMethod.isOptional = (optCount > 0);
                 currentClass.methods.add(currentMethod);

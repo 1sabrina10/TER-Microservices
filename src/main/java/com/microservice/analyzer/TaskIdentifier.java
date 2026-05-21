@@ -1,12 +1,17 @@
 package com.microservice.analyzer;
 
 import java.util.*;
-
 /**
  * Identifie et classifie les taches du projet Ruby.
  * Chaque methode devient une tache PRIMITIVE ou COMPOSITE selon sa position
  */
 public class TaskIdentifier {
+
+    public static final String SAVE = "save";
+    public static final String UPDATE = "update";
+    public static final String DESTROY = "destroy";
+    public static final String FIND = "find";
+    public static final String WHERE = "where";
 
     public enum TaskType {
         PRIMITIVE, COMPOSITE
@@ -93,8 +98,8 @@ public class TaskIdentifier {
                 // elle est probablement composite meme si le graphe dit PRIMITIVE
                 String body = m.body == null ? "" : m.body;
                 int complexity = 0;
-                if (body.contains("save") || body.contains("update") || body.contains("destroy")) complexity++;
-                if (body.contains("find") || body.contains("where")) complexity++;
+                if (body.contains(SAVE) || body.contains(UPDATE) || body.contains(DESTROY)) complexity++;
+                if (body.contains(FIND) || body.contains(WHERE)) complexity++;
                 if (complexity >= 2 && type == TaskType.PRIMITIVE)
                     type = TaskType.COMPOSITE;
 

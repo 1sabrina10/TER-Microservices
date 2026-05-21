@@ -31,7 +31,7 @@ public class DynamicAnalyzer {
         }
     }
 
-    private CallGraph callGraph;
+    private final CallGraph callGraph;
     private List<RubyParser.RubyClass> classes;
 
     public DynamicAnalyzer(CallGraph callGraph, List<RubyParser.RubyClass> classes) {

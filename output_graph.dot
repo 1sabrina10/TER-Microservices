@@ -1,236 +1,152 @@
 digraph Microservices {
     rankdir=LR;
-    graph [fontname="Arial", nodesep=0.5, ranksep=1.0, bgcolor=white];
+    graph [fontname="Arial", nodesep=0.5, ranksep=1.2, bgcolor=white, compound=true];
     node [fontname="Arial", fontsize=10, shape=box, style="filled,rounded"];
     edge [fontname="Arial", arrowsize=0.8];
 
     subgraph cluster_0 {
-        label="CreateCommentsService";
+        label="PostManagementService";
         style="filled,rounded";
-        fillcolor="#b9e3d3";
+        fillcolor="#ccd2c6";
         fontname="Arial Bold";
-        "CreateComments_change" [label="change", fillcolor=white];
+        fontsize=12;
+        "MicropostTest_setup" [label="MicropostTest\n.setup()", fillcolor=white];
+        "MicropostsControllerTest_setup" [label="MicropostsControllerTest\n.setup()", fillcolor=white];
+        "MicropostsInterfaceTest_setup" [label="MicropostsInterfaceTest\n.setup()", fillcolor=white];
+        "CreateMicroposts_change" [label="CreateMicroposts\n.change()", fillcolor=white];
+        "Micropost_display_image" [label="Micropost\n.display_image()", fillcolor=white];
+        "MicropostsController_create" [label="MicropostsController\n.create()", fillcolor=white];
     }
 
     subgraph cluster_1 {
-        label="CreateTimeEntriesService";
+        label="UserManagementService";
         style="filled,rounded";
-        fillcolor="#dcbadc";
+        fillcolor="#dbdab5";
         fontname="Arial Bold";
-        "CreateTimeEntries_change" [label="change", fillcolor=white];
+        fontsize=12;
+        "UserTest_setup" [label="UserTest\n.setup()", fillcolor=white];
+        "UsersControllerTest_setup" [label="UsersControllerTest\n.setup()", fillcolor=white];
+        "UsersLoginTest_setup" [label="UsersLoginTest\n.setup()", fillcolor=white];
+        "UsersSignupTest_setup" [label="UsersSignupTest\n.setup()", fillcolor=white];
+        "FollowingTest_setup" [label="FollowingTest\n.setup()", fillcolor=white];
+        "PasswordResetsTest_setup" [label="PasswordResetsTest\n.setup()", fillcolor=white];
+        "UsersProfileTest_setup" [label="UsersProfileTest\n.setup()", fillcolor=white];
+        "UsersIndexTest_setup" [label="UsersIndexTest\n.setup()", fillcolor=white];
+        "UsersEditTest_setup" [label="UsersEditTest\n.setup()", fillcolor=white];
+        "SessionsHelperTest_setup" [label="SessionsHelperTest\n.setup()", fillcolor=white];
+        "CreateUsers_change" [label="CreateUsers\n.change()", fillcolor=white];
+        "AddIndexToUsersEmail_change" [label="AddIndexToUsersEmail\n.change()", fillcolor=white];
+        "AddResetToUsers_change" [label="AddResetToUsers\n.change()", fillcolor=white];
+        "AddActivationToUsers_change" [label="AddActivationToUsers\n.change()", fillcolor=white];
+        "AddAdminToUsers_change" [label="AddAdminToUsers\n.change()", fillcolor=white];
+        "AddPasswordDigestToUsers_change" [label="AddPasswordDigestToUsers\n.change()", fillcolor=white];
+        "AddRememberDigestToUsers_change" [label="AddRememberDigestToUsers\n.change()", fillcolor=white];
+        "User_User_digest" [label="User\n.User.digest()", fillcolor=white];
+        "User_User_new_token" [label="User\n.User.new_token()", fillcolor=white];
+        "User_remember" [label="User\n.remember()", fillcolor=white];
+        "User_authenticated?" [label="User\n.authenticated?()", fillcolor=white];
+        "User_forget" [label="User\n.forget()", fillcolor=white];
+        "User_activate" [label="User\n.activate()", fillcolor=white];
+        "User_send_activation_email" [label="User\n.send_activation_email()", fillcolor=white];
+        "User_create_reset_digest" [label="User\n.create_reset_digest()", fillcolor=white];
+        "User_send_password_reset_email" [label="User\n.send_password_reset_email()", fillcolor=white];
+        "User_password_reset_expired?" [label="User\n.password_reset_expired?()", fillcolor=white];
+        "User_feed" [label="User\n.feed()", fillcolor=white];
+        "User_follow" [label="User\n.follow()", fillcolor=white];
+        "User_unfollow" [label="User\n.unfollow()", fillcolor=white];
+        "User_following?" [label="User\n.following?()", fillcolor=white];
+        "User_downcase_email" [label="User\n.downcase_email()", fillcolor=white];
+        "User_create_activation_digest" [label="User\n.create_activation_digest()", fillcolor=white];
+        "PasswordResetsController_new" [label="PasswordResetsController\n.new()", fillcolor=white];
+        "PasswordResetsController_create" [label="PasswordResetsController\n.create()", fillcolor=white];
+        "SessionsController_new" [label="SessionsController\n.new()", fillcolor=white];
+        "SessionsController_create" [label="SessionsController\n.create()", fillcolor=white];
+        "StaticPagesController_home" [label="StaticPagesController\n.home()", fillcolor=white];
+        "UsersController_index" [label="UsersController\n.index()", fillcolor=white];
+        "UsersController_show" [label="UsersController\n.show()", fillcolor=white];
+        "UsersController_new" [label="UsersController\n.new()", fillcolor=white];
+        "UsersController_create" [label="UsersController\n.create()", fillcolor=white];
+        "AccountActivationsController_edit" [label="AccountActivationsController\n.edit()", fillcolor=white];
     }
 
     subgraph cluster_2 {
-        label="CreateTaskDependenciesService";
+        label="RelationshipManagementService";
         style="filled,rounded";
-        fillcolor="#d4c2f3";
+        fillcolor="#b9c9e8";
         fontname="Arial Bold";
-        "CreateTaskDependencies_change" [label="change", fillcolor=white];
+        fontsize=12;
+        "RelationshipTest_setup" [label="RelationshipTest\n.setup()", fillcolor=white];
+        "CreateRelationships_change" [label="CreateRelationships\n.change()", fillcolor=white];
+        "RelationshipsController_create" [label="RelationshipsController\n.create()", fillcolor=white];
     }
 
     subgraph cluster_3 {
-        label="CreateProjectMembersService";
-        style="filled,rounded";
-        fillcolor="#b5c9cd";
-        fontname="Arial Bold";
-        "CreateProjectMembers_change" [label="change", fillcolor=white];
-    }
-
-    subgraph cluster_4 {
-        label="CreateTasksService";
-        style="filled,rounded";
-        fillcolor="#c3ecf1";
-        fontname="Arial Bold";
-        "CreateTasks_change" [label="change", fillcolor=white];
-    }
-
-    subgraph cluster_5 {
-        label="CreateNotificationsService";
-        style="filled,rounded";
-        fillcolor="#d8c3cb";
-        fontname="Arial Bold";
-        "CreateNotifications_change" [label="change", fillcolor=white];
-    }
-
-    subgraph cluster_6 {
-        label="CreateUsersService";
-        style="filled,rounded";
-        fillcolor="#f0b6f1";
-        fontname="Arial Bold";
-        "CreateUsers_change" [label="change", fillcolor=white];
-    }
-
-    subgraph cluster_7 {
-        label="CreateProjectsService";
-        style="filled,rounded";
-        fillcolor="#cce6d3";
-        fontname="Arial Bold";
-        "CreateProjects_change" [label="change", fillcolor=white];
-    }
-
-    subgraph cluster_8 {
-        label="UserService";
-        style="filled,rounded";
-        fillcolor="#d7beb8";
-        fontname="Arial Bold";
-        "User_send_welcome_notification" [label="send_welcome_notification", fillcolor=white];
-        "User_assigned_tasks_count" [label="assigned_tasks_count", fillcolor=white];
-        "User_overdue_tasks" [label="overdue_tasks", fillcolor=white];
-        "User_total_logged_minutes" [label="total_logged_minutes", fillcolor=white];
-        "User_complete_task" [label="complete_task", fillcolor=white];
-        "User_create_task_completion_notification" [label="create_task_completion_notification", fillcolor=white];
-        "User_check_project_completion" [label="check_project_completion", fillcolor=white];
-    }
-
-    subgraph cluster_9 {
-        label="ProjectService";
-        style="filled,rounded";
-        fillcolor="#c3c3ea";
-        fontname="Arial Bold";
-        "Project_add_owner_as_member" [label="add_owner_as_member", fillcolor=white];
-        "Project_notify_members" [label="notify_members", fillcolor=white];
-    }
-
-    subgraph cluster_10 {
-        label="TaskDependencyService";
-        style="filled,rounded";
-        fillcolor="#c0eded";
-        fontname="Arial Bold";
-        "TaskDependency_cannot_block_itself" [label="cannot_block_itself", fillcolor=white];
-    }
-
-    subgraph cluster_11 {
         label="NotificationService";
         style="filled,rounded";
         fillcolor="#b4f7de";
         fontname="Arial Bold";
-        "Notification_send_email_if_critical" [label="send_email_if_critical", fillcolor=white];
+        fontsize=12;
+        "UserMailerPreview_account_activation" [label="UserMailerPreview\n.account_activation()", fillcolor=white];
+        "UserMailerPreview_password_reset" [label="UserMailerPreview\n.password_reset()", fillcolor=white];
+        "UserMailer_account_activation" [label="UserMailer\n.account_activation()", fillcolor=white];
+        "UserMailer_password_reset" [label="UserMailer\n.password_reset()", fillcolor=white];
     }
 
-    subgraph cluster_12 {
-        label="CommentService";
+    subgraph cluster_4 {
+        label="TestService";
         style="filled,rounded";
-        fillcolor="#edd7e4";
+        fillcolor="#b4bbcb";
         fontname="Arial Bold";
-        "Comment_notify_task_owner" [label="notify_task_owner", fillcolor=white];
+        fontsize=12;
+        "ActiveSupport__TestCase_is_logged_in?" [label="ActiveSupport::TestCase\n.is_logged_in?()", fillcolor=white];
+        "ActiveSupport__TestCase_log_in_as" [label="ActiveSupport::TestCase\n.log_in_as()", fillcolor=white];
+        "ActionDispatch__IntegrationTest_log_in_as" [label="ActionDispatch::IntegrationTest\n.log_in_as()", fillcolor=white];
     }
 
-    subgraph cluster_13 {
-        label="TimeEntryService";
+    subgraph cluster_5 {
+        label="InfrastructureService";
         style="filled,rounded";
-        fillcolor="#f5dfde";
+        fillcolor="#d0c3e0";
         fontname="Arial Bold";
-        "TimeEntry_duration_hours" [label="duration_hours", fillcolor=white];
-        "TimeEntry_entry_date_not_in_future" [label="entry_date_not_in_future", fillcolor=white];
+        fontsize=12;
+        "CreateActiveStorageTables_change" [label="CreateActiveStorageTables\n.change()", fillcolor=white];
+        "ApplicationController_logged_in_user" [label="ApplicationController\n.logged_in_user()", fillcolor=white];
     }
 
-    subgraph cluster_14 {
-        label="TaskService";
-        style="filled,rounded";
-        fillcolor="#eaefbe";
-        fontname="Arial Bold";
-        "Task_due_date_cannot_be_in_the_past" [label="due_date_cannot_be_in_the_past", fillcolor=white];
-    }
-
-    subgraph cluster_15 {
-        label="TimeEntriesService";
-        style="filled,rounded";
-        fillcolor="#d2bcc0";
-        fontname="Arial Bold";
-        "TimeEntriesController_create" [label="create", fillcolor=white];
-    }
-
-    subgraph cluster_16 {
-        label="NotificationsService";
-        style="filled,rounded";
-        fillcolor="#d5dcf5";
-        fontname="Arial Bold";
-        "NotificationsController_index" [label="index", fillcolor=white];
-        "NotificationsController_mark_as_read" [label="mark_as_read", fillcolor=white];
-    }
-
-    subgraph cluster_17 {
-        label="SessionsService";
-        style="filled,rounded";
-        fillcolor="#dff3ec";
-        fontname="Arial Bold";
-        "SessionsController_new" [label="new", fillcolor=white];
-        "SessionsController_create" [label="create", fillcolor=white];
-    }
-
-    subgraph cluster_18 {
-        label="CommentsService";
-        style="filled,rounded";
-        fillcolor="#e1ccb5";
-        fontname="Arial Bold";
-        "CommentsController_create" [label="create", fillcolor=white];
-    }
-
-    subgraph cluster_19 {
-        label="TasksService";
-        style="filled,rounded";
-        fillcolor="#e1e3d5";
-        fontname="Arial Bold";
-        "TasksController_index" [label="index", fillcolor=white];
-        "TasksController_show" [label="show", fillcolor=white];
-        "TasksController_new" [label="new", fillcolor=white];
-        "TasksController_create" [label="create", fillcolor=white];
-    }
-
-    subgraph cluster_20 {
-        label="UsersService";
-        style="filled,rounded";
-        fillcolor="#f6f3d5";
-        fontname="Arial Bold";
-        "UsersController_new" [label="new", fillcolor=white];
-        "UsersController_create" [label="create", fillcolor=white];
-    }
-
-    subgraph cluster_21 {
-        label="ProjectsService";
-        style="filled,rounded";
-        fillcolor="#dccee3";
-        fontname="Arial Bold";
-        "ProjectsController_index" [label="index", fillcolor=white];
-        "ProjectsController_show" [label="show", fillcolor=white];
-        "ProjectsController_new" [label="new", fillcolor=white];
-        "ProjectsController_create" [label="create", fillcolor=white];
-    }
-
-    subgraph cluster_22 {
-        label="ApplicationService";
-        style="filled,rounded";
-        fillcolor="#c8e9d3";
-        fontname="Arial Bold";
-        "ApplicationController_current_user" [label="current_user", fillcolor=white];
-        "ApplicationController_logged_in?" [label="logged_in?", fillcolor=white];
-        "ApplicationController_require_login" [label="require_login", fillcolor=white];
-    }
-
-    subgraph cluster_23 {
-        label="TaskMailerService";
-        style="filled,rounded";
-        fillcolor="#f7dff4";
-        fontname="Arial Bold";
-        "TaskMailer_notification_email" [label="notification_email", fillcolor=white];
-        "TaskMailer_deadline_reminder" [label="deadline_reminder", fillcolor=white];
-        "TaskMailer_task_assigned" [label="task_assigned", fillcolor=white];
-        "TaskMailer_project_invitation" [label="project_invitation", fillcolor=white];
-    }
-
-    "User_complete_task" -> "User_create_task_completion_notification" [color="#95A5A6"];
-    "User_complete_task" -> "User_check_project_completion" [color="#95A5A6"];
-    "Notification_send_email_if_critical" -> "TaskMailer_notification_email" [color="#E74C3C", style=dashed];
-    "UsersController_new" -> "SessionsController_new" [color="#E74C3C", style=dashed];
-    "UsersController_new" -> "TasksController_new" [color="#E74C3C", style=dashed];
-    "UsersController_new" -> "UsersController_new" [color="#95A5A6"];
-    "UsersController_new" -> "ProjectsController_new" [color="#E74C3C", style=dashed];
-    "UsersController_create" -> "SessionsController_new" [color="#E74C3C", style=dashed];
-    "UsersController_create" -> "TasksController_new" [color="#E74C3C", style=dashed];
-    "UsersController_create" -> "UsersController_new" [color="#95A5A6"];
-    "UsersController_create" -> "ProjectsController_new" [color="#E74C3C", style=dashed];
-    "ProjectsController_new" -> "SessionsController_new" [color="#E74C3C", style=dashed];
-    "ProjectsController_new" -> "TasksController_new" [color="#E74C3C", style=dashed];
-    "ProjectsController_new" -> "UsersController_new" [color="#E74C3C", style=dashed];
-    "ProjectsController_new" -> "ProjectsController_new" [color="#95A5A6"];
+    "UserTest_setup" -> "PasswordResetsController_new" [color="#95A5A6", weight=2];
+    "UserTest_setup" -> "SessionsController_new" [color="#95A5A6", weight=2];
+    "UserTest_setup" -> "UsersController_new" [color="#95A5A6", weight=2];
+    "RelationshipTest_setup" -> "PasswordResetsController_new" [color="#E74C3C", style=dashed, weight=1];
+    "RelationshipTest_setup" -> "SessionsController_new" [color="#E74C3C", style=dashed, weight=1];
+    "RelationshipTest_setup" -> "UsersController_new" [color="#E74C3C", style=dashed, weight=1];
+    "UserMailerPreview_account_activation" -> "UserMailer_account_activation" [color="#95A5A6", weight=2];
+    "UserMailerPreview_password_reset" -> "UserMailer_password_reset" [color="#95A5A6", weight=2];
+    "FollowingTest_setup" -> "ActiveSupport__TestCase_log_in_as" [color="#E74C3C", style=dashed, weight=1];
+    "FollowingTest_setup" -> "ActionDispatch__IntegrationTest_log_in_as" [color="#E74C3C", style=dashed, weight=1];
+    "SessionsHelperTest_setup" -> "User_remember" [color="#95A5A6", weight=2];
+    "CreateActiveStorageTables_change" -> "UsersController_index" [color="#E74C3C", style=dashed, weight=1];
+    "User_User_digest" -> "PasswordResetsController_create" [color="#95A5A6", weight=2];
+    "User_User_digest" -> "SessionsController_create" [color="#95A5A6", weight=2];
+    "User_User_digest" -> "MicropostsController_create" [color="#E74C3C", style=dashed, weight=1];
+    "User_User_digest" -> "UsersController_create" [color="#95A5A6", weight=2];
+    "User_User_digest" -> "RelationshipsController_create" [color="#E74C3C", style=dashed, weight=1];
+    "User_authenticated?" -> "PasswordResetsController_new" [color="#95A5A6", weight=2];
+    "User_authenticated?" -> "SessionsController_new" [color="#95A5A6", weight=2];
+    "User_authenticated?" -> "UsersController_new" [color="#95A5A6", weight=2];
+    "User_send_activation_email" -> "UserMailer_account_activation" [color="#E74C3C", style=dashed, weight=1];
+    "User_send_password_reset_email" -> "UserMailer_password_reset" [color="#E74C3C", style=dashed, weight=1];
+    "PasswordResetsController_create" -> "User_create_reset_digest" [color="#95A5A6", weight=2];
+    "PasswordResetsController_create" -> "User_send_password_reset_email" [color="#95A5A6", weight=2];
+    "MicropostsController_create" -> "User_feed" [color="#E74C3C", style=dashed, weight=1];
+    "StaticPagesController_home" -> "User_feed" [color="#95A5A6", weight=2];
+    "UsersController_new" -> "PasswordResetsController_new" [color="#95A5A6", weight=2];
+    "UsersController_new" -> "SessionsController_new" [color="#95A5A6", weight=2];
+    "UsersController_new" -> "UsersController_new" [color="#95A5A6", weight=2];
+    "UsersController_create" -> "PasswordResetsController_new" [color="#95A5A6", weight=2];
+    "UsersController_create" -> "SessionsController_new" [color="#95A5A6", weight=2];
+    "UsersController_create" -> "UsersController_new" [color="#95A5A6", weight=2];
+    "UsersController_create" -> "User_send_activation_email" [color="#95A5A6", weight=2];
+    "AccountActivationsController_edit" -> "User_authenticated?" [color="#95A5A6", weight=2];
+    "AccountActivationsController_edit" -> "User_activate" [color="#95A5A6", weight=2];
+    "RelationshipsController_create" -> "User_follow" [color="#E74C3C", style=dashed, weight=1];
 }

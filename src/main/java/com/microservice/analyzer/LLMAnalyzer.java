@@ -208,18 +208,28 @@ public class LLMAnalyzer {
         System.out.println(res2);
     }
 
-    /** Soumet les ambiguites de polymorphisme au LLM pour resolution. */
+    /** Soumet les ambiguites de polymorphisme au LLM pour une resolution et un decoupage global. */
     public void askLLMToResolve(List<String> ambiguities) {
         StringBuilder prompt = new StringBuilder();
-        prompt.append("Aide-moi a eliminer l'ambiguite pour ces methodes polymorphes :\n");
-        for (String a : ambiguities)
+        prompt.append("ANALYSE COMPLÈTE REQUISE :\n");
+        prompt.append("Nous devons résoudre les collisions de nommage suivantes détectées par le polymorphisme :\n");
+        for (String a : ambiguities) {
             prompt.append("- ").append(a).append("\n");
-        prompt.append("\nQuelles methodes doivent etre extraites en microservices separes ?");
+        }
+
+        prompt.append("\nInstructions de découpage architectural (Strictes) :\n");
+        prompt.append("1. Ne te limite pas uniquement aux méthodes ambiguës. Conçois des microservices COMPLETS et AUTONOMES.\n");
+        prompt.append("2. Associe CHAQUE contrôleur détecté dans le contexte au domaine métier (Bounded Context) correspondant.\n");
+        prompt.append("3. Pour chaque microservice proposé, liste explicitement :\n");
+        prompt.append("   - Les Contrôleurs inclus\n");
+        prompt.append("   - Les Modèles inclus (avec toutes leurs méthodes)\n");
+        prompt.append("4. Spécifie le sort des classes de base techniques (ex: ApplicationController, ApplicationRecord) : doivent-elles être dupliquées ou partagées en tant que dépendances d'infrastructure ?\n");
+        prompt.append("\nFormate ta réponse de manière structurée avec les sections : 'Analyse des domaines', 'Découpage en Microservices' et 'Traitement de l'infrastructure'.");
 
         String response = ask(prompt.toString());
 
         System.out.println("\n" + "=".repeat(40));
-        System.out.println(" RESOLUTION DES AMBIGUITES");
+        System.out.println(" RESOLUTION GLOBALE ET DECOUPAGE");
         System.out.println("=".repeat(40));
         System.out.println(response);
         System.out.println("=".repeat(40) + "\n");
