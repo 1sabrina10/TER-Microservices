@@ -1,76 +1,61 @@
-Extraction de Microservices par Analyse Hybride (Java & LLM)
+# Extraction de Microservices par Analyse Hybride (Java & LLM)
 
-Ce projet de recherche et développement (Travaux d’Étude et de Recherche - Master 1 Informatique) propose une approche hybride visant à automatiser la transition d’une architecture monolithique Ruby on Rails vers une architecture orientée microservices.
+Ce projet de recherche et développement (Travaux d'Étude et de Recherche - Master 1 Informatique) implémente une approche hybride pour automatiser la transition d'une architecture monolithique Ruby on Rails vers une architecture en microservices. Le système combine la précision de l'analyse structurelle en Java avec la capacité d'arbitrage sémantique d'un grand modèle de langage (LLM), répondant spécifiquement aux défis posés par le polymorphisme dans les langages à typage dynamique.
 
-Le système combine la précision de l’analyse structurelle statique en Java avec la puissance d’arbitrage sémantique d’un grand modèle de langage (LLM) afin d’identifier, analyser et proposer une décomposition cohérente du système en services indépendants.
+## Fonctionnalités principales
 
-Fonctionnalités principales
+* Analyseur syntaxique (AST) : Extraction automatique des classes, de l'arbre d'héritage et des déclarations de méthodes du code source Ruby.
+* Détection du polymorphisme : Identification et classification des ambiguïtés de nommage (Polymorphisme Simple, Héritage, Combiné) afin d'isoler les zones de conflit structurel.
+* Calcul des scénarios (BFS) : Identification automatique des points d'entrée (degré entrant nul) et exécution d'un parcours en largeur pour évaluer le taux de couverture des flux via un algorithme glouton de couverture maximale.
+* Arbitrage sémantique par LLM : Génération d'un contexte applicatif sérialisé et transmission à un LLM (via OpenRouter) pour déterminer les frontières métiers selon les principes du Domain-Driven Design (DDD).
+* Gestion d'état et optimisation : Implémentation d'un historique de conversation multi-tours pour les questions de suivi et d'un cache local pour limiter la consommation de jetons.
+* Export et visualisation : Génération de graphes au format DOT (Graphviz) mettant en évidence l'état de couplage actuel et les directives de découpage architectural.
 
-Analyseur syntaxique (AST)
-Extraction automatique des classes, de l’arbre d’héritage et des signatures de méthodes à partir du code source Ruby.
+## Prérequis
 
-Détection du polymorphisme
-Identification et classification des ambiguïtés de nommage (polymorphisme simple, héritage, combiné) afin de détecter les conflits structurels.
+* Java Development Kit (JDK) 17 ou supérieur
+* Apache Maven (pour la gestion des dépendances et le build)
+* Une clé d'accès à l'API OpenRouter
 
-Analyse des scénarios (BFS)
-Détection des points d’entrée (degré entrant nul) et exploration des flux via un parcours en largeur pour mesurer la couverture du système.
+## Configuration et Sécurité
 
-Arbitrage sémantique par LLM
-Génération d’un contexte applicatif structuré et transmission à un LLM (via OpenRouter) pour déterminer les frontières métiers selon les principes du Domain-Driven Design (DDD).
+Pour respecter les standards de sécurité et éviter l'intégration de secrets en dur dans le code source, la clé d'API est lue depuis les variables d'environnement du système.
 
-Gestion d’état et optimisation
-Historique de conversation multi-tours et mécanisme de cache local pour réduire la consommation de tokens et optimiser les appels API.
-
-Export et visualisation
-Génération de graphes au format DOT (Graphviz) représentant les frontières architecturales et les futurs microservices.
-
-Prérequis
-Java Development Kit (JDK 17 ou supérieur)
-Apache Maven
-Clé API OpenRouter
-Configuration et sécurité
-
-La clé API n’est jamais stockée en dur dans le code source. Elle est chargée via les variables d’environnement du système.
-
-Linux / macOS
+Configuration sous Linux / macOS :
 export OPENROUTER_KEY="votre_cle_openrouter_ici"
-Windows (CMD)
+
+Configuration sous Windows (Invite de commandes) :
 set OPENROUTER_KEY="votre_cle_openrouter_ici"
 
-En cas d’absence de configuration, le programme applique un principe fail-fast et lève une exception IllegalStateException lors de l’initialisation.
+Le programme applique un principe de validation immédiate (Fail-Fast) : si la variable d'environnement est absente ou vide, une exception 'IllegalStateException' est levée dès l'initialisation du constructeur.
 
-Utilisation
-Compilation
+## Utilisation
+
+Compilation du projet :
 mvn clean package
-Exécution
+
+Exécution de l'analyse :
+Le point d'entrée principal (Main) prend en paramètre le chemin du répertoire contenant l'application monolithique :
 java -jar target/mon-analyseur-1.0.jar /chemin/vers/le/code/source/rails
-Comportement de l’orchestrateur
 
-Le pipeline adapte dynamiquement son exécution selon les résultats de l’analyse structurelle :
+Branchement conditionnel de l'exécution :
+L'orchestrateur adapte son comportement selon les résultats de l'analyse structurelle :
+* Si des ambiguïtés sont détectées : Le LLM est sollicité en mode résolution ciblée pour arbitrer spécifiquement chaque conflit de polymorphisme.
+* Si aucune ambiguïté n'est détectée : Le LLM est appelé pour produire une évaluation architecturale globale et macroscopique.
 
-Présence d’ambiguïtés
-Le LLM est sollicité pour arbitrer chaque conflit de polymorphisme.
-Absence d’ambiguïtés
-Le LLM fournit une analyse architecturale globale du système.
-Architecture du pipeline
-1. Analyse structurelle (Java)
+## Architecture du Pipeline
 
-Extraction de l’AST du code source afin d’identifier les classes, méthodes et dépendances.
-Un parcours en largeur (BFS) est ensuite appliqué à partir des points d’entrée pour construire les scénarios d’exécution et mesurer la couverture des flux.
+Le pipeline de traitement s'articule autour de trois couches logiques successives :
 
-2. Arbitrage sémantique (LLM / IA)
+1. Analyse Structurelle (Java) : Cette première couche est chargée d'extraire l'arbre de syntaxe abstraite (AST) du code source pour recenser les classes et les méthodes. Elle exécute ensuite un parcours en largeur (BFS) à partir des points d'entrée identifiés afin de construire les scénarios et mesurer leur taux de couverture. Les résultats de cette phase (graphe d'appels XTA et classifications) sont compilés et sérialisés.
 
-Les données structurées sont envoyées à un LLM avec historique conversationnel.
-Le modèle applique une analyse basée sur le Domain-Driven Design (DDD) afin d’identifier les frontières métiers et de résoudre les conflits de conception.
+2. Arbitrage Sémantique (LLM / IA) : Le bloc de texte structuré généré par la couche précédente est transmis à l'API du modèle de langage avec son historique de discussion. Le LLM applique un raisonnement basé sur le Domain-Driven Design (DDD) pour analyser la sémantique métier des classes. Il résout les conflits de polymorphisme en proposant des stratégies adaptées (duplication, création d'interfaces partagées ou regroupement).
 
-3. Visualisation et export
+3. Visualisation Cible (Microservices) : Les directives d'architecture et de refactoring validées par l'arbitrage sémantique sont envoyées au module d'exportation. Ce dernier génère le fichier final au format DOT (Graphviz) mettant en évidence les frontières d'isolation (Bounded Contexts) et la répartition idéale des futurs microservices.
 
-Les décisions architecturales sont traduites en un graphe DOT (Graphviz) représentant :
+## Informations Académiques
 
-les bounded contexts
-les dépendances entre modules
-la décomposition en microservices
-Informations académiques
-Cadre : Travaux d’Étude et de Recherche (TER)
-Niveau : Master 1 Informatique
-Institution : Université de Montpellier
+* Cadre : Travaux d'Étude et de Recherche (TER)
+* Sujet : Migration d'une architecture logicielle monolithique vers une architecture à base de microservices : étude de cas des langages à typage dynamique
+* Niveau : Master 1 Informatique
+* Institution : Université de Montpellier
