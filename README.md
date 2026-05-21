@@ -5,18 +5,25 @@ Ce projet de recherche et développement (Travaux d’Étude et de Recherche - M
 Le système combine la précision de l’analyse structurelle statique en Java avec la puissance d’arbitrage sémantique d’un grand modèle de langage (LLM) afin d’identifier, analyser et proposer une décomposition cohérente du système en services indépendants.
 
 Fonctionnalités principales
+
 Analyseur syntaxique (AST)
 Extraction automatique des classes, de l’arbre d’héritage et des signatures de méthodes à partir du code source Ruby.
+
 Détection du polymorphisme
 Identification et classification des ambiguïtés de nommage (polymorphisme simple, héritage, combiné) afin de détecter les conflits structurels.
+
 Analyse des scénarios (BFS)
 Détection des points d’entrée (degré entrant nul) et exploration des flux via un parcours en largeur pour mesurer la couverture du système.
+
 Arbitrage sémantique par LLM
 Génération d’un contexte applicatif structuré et transmission à un LLM (via OpenRouter) pour déterminer les frontières métiers selon les principes du Domain-Driven Design (DDD).
+
 Gestion d’état et optimisation
 Historique de conversation multi-tours et mécanisme de cache local pour réduire la consommation de tokens et optimiser les appels API.
+
 Export et visualisation
 Génération de graphes au format DOT (Graphviz) représentant les frontières architecturales et les futurs microservices.
+
 Prérequis
 Java Development Kit (JDK 17 ou supérieur)
 Apache Maven
