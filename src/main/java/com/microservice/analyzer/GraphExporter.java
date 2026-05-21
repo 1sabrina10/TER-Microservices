@@ -62,7 +62,7 @@ public class GraphExporter {
 
             System.out.println(" Cartographie sémantique initialisée avec succès !");
         } catch (Exception e) {
-            System.out.println("⚠️ Échec du mapping LLM automatique, repli sur la règle par défaut : " + e.getMessage());
+            System.out.println(" Échec du mapping LLM automatique, repli sur la règle par défaut : " + e.getMessage());
             // Fallback par défaut si le parsing JSON échoue
             for (String className : uniqueClasses) {
                 classToServiceMap.put(className, fallbackGetMicroservice(className));
